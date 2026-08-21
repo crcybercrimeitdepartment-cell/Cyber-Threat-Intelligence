@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0a192f;
+  --color-secondary: #0070f3;
+  --color-accent: #00dfd8;
+  --color-dark: #020c1b;
+  --color-light: #e6f1ff;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: #010914;
+  color: #1e293b;
+  overflow-x: clip;
+  position: relative;
+}
+
+.watermark-bg {
+  position: relative;
+  z-index: 1;
+  background-color: #f8fafc;
+}
+
+.watermark-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image: url('./assets/bg-mobile.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* Make section backgrounds transparent so the watermark is visible behind them, but cards stay solid */
+.watermark-bg > *:not(footer),
+.watermark-bg > div > section {
+  background-color: transparent !important;
+}
+
+@media (min-width: 768px) {
+  .watermark-bg::before {
+    background-image: url('./assets/bg-desktop.jpg');
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading) !important;
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 3D Flip Card Styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
