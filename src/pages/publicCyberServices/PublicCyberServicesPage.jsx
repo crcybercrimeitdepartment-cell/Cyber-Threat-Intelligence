@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import NavPageHeader from '../../components/NavPageHeader';
 
 // Custom CSS styles injected directly for 100% self-contained card styling
 const posterStyles = `
@@ -824,14 +825,10 @@ export default function PublicCyberServicesPage() {
       <div className="poster-page-wrapper min-h-[calc(100vh-100px)] w-full flex flex-col items-center justify-start p-4 sm:p-6 md:p-8 select-none bg-transparent">
         
         {/* Header */}
-        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12 mt-16 md:mt-4 w-full">
-          <h1 className="animate-header text-4xl md:text-5xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-500 drop-shadow-sm leading-tight">
-            Public Cyber Services
-          </h1>
-          <p className="animate-desc text-gray-600 text-lg font-medium leading-relaxed">
-            Access public-focused cyber services and practical guidance designed to help individuals and communities understand digital risks, improve online safety, prevent cybercrime, and find appropriate support.
-          </p>
-        </div>
+        <NavPageHeader
+          title="Public Cyber Services"
+          description="Access public-focused cyber services and practical guidance designed to help individuals and communities understand digital risks, improve online safety, prevent cybercrime, and find appropriate support."
+        />
 
         <div className="w-full max-w-[1200px] grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8 items-center justify-center pb-8 mx-auto px-1 sm:px-0">
           {postersData.map((poster, index) => (

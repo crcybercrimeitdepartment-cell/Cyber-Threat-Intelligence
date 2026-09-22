@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as Icons from 'lucide-react';
 import { partnershipData } from '../../data/cybersecurityPartnership/cybersecurityPartnershipData.js';
+import NavPageHeader from '../../components/NavPageHeader';
 
 
 
@@ -324,22 +325,6 @@ export default function PartnershipPage() {
                     transform: translateZ(0);
                     backface-visibility: hidden;
                 }
-                @keyframes headerSlideDown {
-                    0% { opacity: 0; transform: translateY(-30px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-                .animate-header {
-                    opacity: 0;
-                    animation: headerSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-                }
-                @keyframes descriptionFade {
-                    0% { opacity: 0; transform: translateY(20px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-                .animate-desc {
-                    opacity: 0;
-                    animation: descriptionFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
-                }
                 @keyframes cardWaveEntrance {
                     0% { opacity: 0; transform: translateY(50px) scale(0.98); }
                     100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -354,14 +339,10 @@ export default function PartnershipPage() {
             <div className="max-w-[1400px] mx-auto relative z-10 px-4 md:px-8">
 
                 {/* ── PAGE HEADER ── */}
-                <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-8 mt-16 md:mt-4 relative z-20">
-                  <h1 className="animate-header text-4xl md:text-5xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-500 leading-tight">
-                    Cybersecurity Partnership
-                  </h1>
-                  <p className="animate-desc text-gray-600 text-lg font-medium leading-relaxed px-4">
-                    Collaborate with CR-OD CTI to enhance collective cyber defense. Partner with us to share intelligence, integrate security solutions, sponsor awareness campaigns, and strengthen community resilience against evolving digital threats.
-                  </p>
-                </div>
+                <NavPageHeader
+                  title="Cybersecurity Partnership"
+                  description="Collaborate with CR-OD CTI to enhance collective cyber defense. Partner with us to share intelligence, integrate security solutions, sponsor awareness campaigns, and strengthen community resilience against evolving digital threats."
+                />
 
                 {/* ── CARD GRID ── */}
                 <div

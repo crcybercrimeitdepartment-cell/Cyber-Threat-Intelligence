@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
+import NavPageHeader from '../../components/NavPageHeader';
 
 const Logo = ({ color = "#139a9c", textColor = "#139a9c", Icon = Fingerprint, text = "LILO" }) => (
   <div className="flex flex-col items-center">
@@ -300,19 +301,10 @@ const BecomeMemberPage = () => {
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
         
         {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center max-w-4xl mx-auto mb-6 sm:mb-8 mt-16 md:mt-4"
-        >
-          <h1 className="text-4xl md:text-5xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-500 drop-shadow-sm leading-tight">
-            Explore Memberships
-          </h1>
-          <p className="text-gray-600 text-lg font-medium leading-relaxed max-w-3xl mx-auto">
-            Choose from a variety of distinct membership tiers to support digital resilience, collaborate on safety initiatives, and participate in creating a secure digital environment.
-          </p>
-        </motion.div>
+        <NavPageHeader
+          title="Explore Memberships"
+          description="Choose from a variety of distinct membership tiers to support digital resilience, collaborate on safety initiatives, and participate in creating a secure digital environment."
+        />
 
         {/* 12-Card Grid Layout (Mobile: 2 cols, Tablet: 3 cols, Desktop: 4 cols) */}
         <motion.div 

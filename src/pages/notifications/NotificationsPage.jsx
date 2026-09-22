@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
 import { notificationData } from '../../data/notification/notificationData.js';
+import NavPageHeader from '../../components/NavPageHeader';
 
 const FlashMessage = ({ type, title, message }) => {
     // 9 distinct styles for 9 different cards
@@ -160,37 +161,13 @@ const NotificationsPage = () => {
 
     return (
         <div className="min-h-[calc(100vh-100px)] w-full pt-4 pb-20 relative overflow-hidden bg-transparent">
-            <style dangerouslySetInnerHTML={{
-                __html: `
-                @keyframes headerSlideDown {
-                    0% { opacity: 0; transform: translateY(-30px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-                .animate-header {
-                    opacity: 0;
-                    animation: headerSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-                }
-                @keyframes descriptionFade {
-                    0% { opacity: 0; transform: translateY(20px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-                .animate-desc {
-                    opacity: 0;
-                    animation: descriptionFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
-                }
-                `
-            }} />
             <div className="max-w-[1280px] mx-auto px-6 md:px-8 relative z-10">
                 
                 {/* ── PAGE HEADER ── */}
-                <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 mt-16 md:mt-4 relative z-20">
-                    <h1 className="animate-header text-4xl md:text-5xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-500 leading-tight">
-                        Notifications
-                    </h1>
-                    <p className="animate-desc text-gray-700 text-lg font-medium leading-relaxed">
-                        Stay updated with the latest security alerts, intelligence reports, and platform announcements.
-                    </p>
-                </div>
+                <NavPageHeader
+                    title="Notifications"
+                    description="Stay updated with the latest security alerts, intelligence reports, and platform announcements."
+                />
 
                 {/* ── NOTIFICATIONS GRID ── */}
                 <motion.div 

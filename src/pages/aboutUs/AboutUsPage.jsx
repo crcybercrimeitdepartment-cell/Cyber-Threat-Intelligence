@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { aboutUsData } from '../../data/aboutUs/aboutUsData';
+import NavPageHeader from '../../components/NavPageHeader';
 
 // Custom SVGs with advanced micro-animations for high-fidelity hover states
 const SearchIcon = ({ isHovered }) => (
@@ -320,22 +321,6 @@ const AboutUsPage = () => {
     <div className="min-h-[calc(100vh-100px)] w-full pt-4 pb-20 relative overflow-x-hidden">
       <style dangerouslySetInnerHTML={{
         __html: `
-        @keyframes headerSlideDown {
-            0% { opacity: 0; transform: translateY(-30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        .animate-header {
-            opacity: 0;
-            animation: headerSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes descriptionFade {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        .animate-desc {
-            opacity: 0;
-            animation: descriptionFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
-        }
         @keyframes cardWaveEntrance {
             0% { opacity: 0; transform: translateY(50px) scale(0.98); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -351,14 +336,10 @@ const AboutUsPage = () => {
       <div className="max-w-[1700px] mx-auto px-4 md:px-8 relative z-10">
         
         {/* Header Outside the Page Box */}
-        <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-8 mt-16 md:mt-4">
-          <h1 className="animate-header text-4xl md:text-5xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-500 leading-tight">
-            About Us
-          </h1>
-          <p className="animate-desc text-gray-600 text-lg font-medium leading-relaxed">
-            Learn about CR-OD CTI, our purpose, mission, vision, objectives, and commitment to building a safer, more aware, and digitally resilient society through cyber awareness, protection, support, and trusted information.
-          </p>
-        </div>
+        <NavPageHeader
+          title="About Us"
+          description="Learn about CR-OD CTI, our purpose, mission, vision, objectives, and commitment to building a safer, more aware, and digitally resilient society through cyber awareness, protection, support, and trusted information."
+        />
 
         {/* The "Page" Box containing everything */}
         <div className="bg-transparent relative">

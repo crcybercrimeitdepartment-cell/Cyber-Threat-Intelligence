@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
 import * as Icons from 'lucide-react';
 import { incidentReportData } from '../../data/incidentReport/incidentReportData.js';
+import NavPageHeader from '../../components/NavPageHeader';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -198,7 +199,7 @@ const CyberCrimeCard = ({ crime, itemVariants }) => {
           </div>
 
           {/* Arrow Button */}
-          <div className="absolute bottom-[12px] sm:bottom-[16px] right-[12px] sm:right-[16px] z-10">
+          <div className="absolute bottom-[12px] sm:bottom-[16px] right-[12px] sm:right-[16px] z-10" data-allow-interaction="true">
             <div className="w-[34px] h-[34px] sm:w-[42px] sm:h-[42px] rounded-[10px] sm:rounded-[12px] bg-[#EEF2F7] shadow-[inset_2px_3px_6px_rgba(0,0,0,0.12),inset_-2px_-3px_6px_rgba(255,255,255,1)] flex items-center justify-center border border-white/60">
               <motion.div 
                 variants={{ hover: { x: 3 } }}
@@ -232,24 +233,10 @@ const IncidentReportPage = () => {
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10 text-[#1a1a24] font-sans">
         
         {/* Animated Header inside the transparent box */}
-        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 mt-16 md:mt-4">
-          <motion.h1 
-            initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="text-4xl md:text-5xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-500 drop-shadow-sm leading-tight"
-          >
-            Cyber Crime Incident Report
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="text-gray-700 text-lg font-medium leading-relaxed mb-8"
-          >
-            Get guidance for understanding, documenting, preparing, and reporting cybercrime incidents while preserving relevant information and identifying appropriate official reporting channels and support resources.
-          </motion.p>
-        </div>
+        <NavPageHeader
+          title="Cyber Crime Incident Report"
+          description="Get guidance for understanding, documenting, preparing, and reporting cybercrime incidents while preserving relevant information and identifying appropriate official reporting channels and support resources."
+        />
 
         {/* Animated Grid placed in transparent wrapper */}
         <motion.div 

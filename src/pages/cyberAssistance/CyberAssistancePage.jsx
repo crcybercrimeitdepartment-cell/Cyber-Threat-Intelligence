@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import * as Icons from 'lucide-react';
 import { cyberAssistanceData } from '../../data/cyberAssistance/cyberAssistanceData.js';
+import NavPageHeader from '../../components/NavPageHeader';
 
 const themes = [
     { gradient: 'from-[#558B2F] to-[#2E7D32]', text: 'text-[#2E7D32]' }, // Green (Matches the image)
@@ -156,24 +157,10 @@ const CyberAssistancePage = () => {
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10 text-[#1a1a24] font-sans">
         
         {/* Animated Header */}
-        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 mt-16 md:mt-4">
-          <motion.h1 
-            initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="text-4xl md:text-5xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-500 drop-shadow-sm leading-tight"
-          >
-            Cyber Assistance Directory
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="text-gray-700 text-lg font-medium leading-relaxed mb-8"
-          >
-            Find verified cybersecurity organizations, technical support providers, victim assistance services, counselling resources, financial support channels, and other trusted services for cyber-related concerns.
-          </motion.p>
-        </div>
+        <NavPageHeader
+          title="Cyber Assistance Directory"
+          description="Find verified cybersecurity organizations, technical support providers, victim assistance services, counselling resources, financial support channels, and other trusted services for cyber-related concerns."
+        />
 
         {/* Animated Grid placed in transparent wrapper */}
         <motion.div

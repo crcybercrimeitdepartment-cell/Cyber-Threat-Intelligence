@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { directoryData, themes } from '../../data/cyberLegal/cyberLegalData';
+import NavPageHeader from '../../components/NavPageHeader';
 
 const CyberDirectoryCard = ({ item, index }) => {
     const Icon = item.icon;
@@ -187,20 +188,10 @@ const CyberLegalPage = () => {
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
         
         {/* Header Outside the Page Box */}
-        <motion.div 
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center max-w-4xl mx-auto mb-6 sm:mb-8 mt-16 md:mt-4"
-        >
-          <h1 className="text-4xl md:text-5xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-500 drop-shadow-sm leading-tight">
-            Cyber & Legal Directory
-          </h1>
-          <p className="text-gray-600 text-lg font-medium leading-relaxed">
-            Find verified information about cybercrime police, law-enforcement agencies, courts, legal institutions, regulatory authorities, legal-support organizations, and relevant cyber and legal services.
-          </p>
-        </motion.div>
+        <NavPageHeader
+          title="Cyber & Legal Directory"
+          description="Find verified information about cybercrime police, law-enforcement agencies, courts, legal institutions, regulatory authorities, legal-support organizations, and relevant cyber and legal services."
+        />
 
         {/* The "Page" Box containing content */}
         <div className="bg-transparent relative min-h-[300px]">

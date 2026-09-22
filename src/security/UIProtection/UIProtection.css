@@ -1,0 +1,178 @@
+/**
+ * UI Protection & Read-Only Security Module Stylesheet
+ * 
+ * Provides scoped, performance-optimized CSS rules for:
+ * - Anti-selection and highlight suppression
+ * - Anti-drag for elements, text, and graphics
+ * - Read-only cursor and interaction presentation
+ * - Touch and mobile gesture safety
+ * - Print restriction media query rules
+ */
+
+/* Main Protected Scope Container */
+.ui-protected-container {
+  position: relative;
+  -webkit-touch-callout: none;
+  /* Ensure smooth vertical touch scrolling is never blocked on mobile/tablets */
+  touch-action: pan-y;
+}
+
+/* 19.2 Anti-Select UI */
+.ui-protected--anti-select,
+.ui-protected--anti-select * {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Exceptions: Preserve selection inside genuine editable controls */
+.ui-protected--anti-select input,
+.ui-protected--anti-select textarea,
+.ui-protected--anti-select [contenteditable="true"],
+.ui-protected--anti-select [data-allow-interaction="true"],
+.ui-protected--anti-select [data-allow-interaction="true"] *,
+.ui-protected--anti-select [data-protection-ignore="true"],
+.ui-protected--anti-select [data-protection-ignore="true"] * {
+  -webkit-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  user-select: auto !important;
+}
+
+/* 19.8 Anti-Text-Highlight UI */
+.ui-protected--text-highlight-protection ::selection {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+.ui-protected--text-highlight-protection ::-moz-selection {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+/* Highlight exception for editable inputs */
+.ui-protected--text-highlight-protection input::selection,
+.ui-protected--text-highlight-protection textarea::selection,
+.ui-protected--text-highlight-protection [data-allow-interaction="true"] ::selection,
+.ui-protected--text-highlight-protection [data-protection-ignore="true"] ::selection {
+  background: #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* 19.3 Anti-Drag UI */
+.ui-protected--anti-drag,
+.ui-protected--anti-drag * {
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+}
+
+/* Exceptions for drag in interactive sliders or allowed controls */
+.ui-protected--anti-drag [data-allow-interaction="true"],
+.ui-protected--anti-drag [data-protection-ignore="true"] {
+  -webkit-user-drag: auto !important;
+  user-drag: auto !important;
+}
+
+/* 19.6 & 19.10 Image & Graphic Protection */
+.ui-protected--image-drag img,
+.ui-protected--image-drag svg,
+.ui-protected--image-drag picture,
+.ui-protected--image-drag canvas,
+.ui-protected-image {
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+/* Protected Image Dedicated Wrapper */
+.ui-protected-image-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ui-protected-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+/* 19.12 Anti-Link-Interaction UI */
+.ui-protected--link-protection span,
+.ui-protected--link-protection p,
+.ui-protected--link-protection h1,
+.ui-protected--link-protection h2,
+.ui-protected--link-protection h3,
+.ui-protected--link-protection h4,
+.ui-protected--link-protection h5,
+.ui-protected--link-protection h6,
+.ui-protected--link-protection div:not([role="button"]):not([onclick]) {
+  /* Prevent non-interactive elements from mimicking links */
+  cursor: default;
+}
+
+/* Preserve cursor pointer on buttons, links, and genuine controls */
+.ui-protected-container button,
+.ui-protected-container a,
+.ui-protected-container [role="button"],
+.ui-protected-container [role="link"],
+.ui-protected-container [role="tab"],
+.ui-protected-container .cursor-pointer {
+  cursor: pointer !important;
+}
+
+/* 19.13 Read-Only UI Mode */
+.ui-protected--read-only input:not([data-allow-interaction="true"]),
+.ui-protected--read-only textarea:not([data-allow-interaction="true"]) {
+  cursor: default;
+}
+
+/* 19.7 Print Restriction UI */
+.ui-protected-print-notice {
+  display: none !important;
+}
+
+@media print {
+  /* Hide protected content from physical and PDF print outputs */
+  .ui-protected--print-restriction {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Display security notice when print restriction is enabled */
+  .ui-protected-print-notice {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 60px 40px !important;
+    margin: 40px auto !important;
+    max-width: 600px !important;
+    text-align: center !important;
+    border: 2px dashed #94a3b8 !important;
+    border-radius: 12px !important;
+    background: #f8fafc !important;
+    color: #1e293b !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+  }
+
+  .ui-protected-print-notice h2 {
+    font-size: 18pt !important;
+    font-weight: 700 !important;
+    color: #dc2626 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .ui-protected-print-notice p {
+    font-size: 12pt !important;
+    color: #475569 !important;
+    line-height: 1.5 !important;
+  }
+}

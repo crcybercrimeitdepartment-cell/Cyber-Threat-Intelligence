@@ -4,6 +4,7 @@ import * as Icons from 'lucide-react';
 import { publicInfoData } from '../../data/publicInfo/publicInfoData.js';
 import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
+import NavPageHeader from '../../components/NavPageHeader';
 
 const PublicInfoPage = () => {
   return (
@@ -12,19 +13,10 @@ const PublicInfoPage = () => {
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
         
         {/* Header Outside the Page Box */}
-        <motion.div 
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, ease: "easeOut" }}
-          className="text-center max-w-4xl mx-auto mb-16 mt-12 md:mt-8"
-        >
-          <h1 className="text-4xl md:text-5xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-500 drop-shadow-sm leading-tight">
-            Public Information Directory
-          </h1>
-          <p className="text-gray-700 text-lg font-medium leading-relaxed drop-shadow-sm">
-            Access reliable statistics, public cyber advisories, trending threat reports, cybersecurity glossaries, digital hygiene guidelines, and other essential cyber information for general awareness.
-          </p>
-        </motion.div>
+        <NavPageHeader
+          title="Public Information Directory"
+          description="Access reliable statistics, public cyber advisories, trending threat reports, cybersecurity glossaries, digital hygiene guidelines, and other essential cyber information for general awareness."
+        />
 
         {/* The Grid of Cards */}
         <motion.div 

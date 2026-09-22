@@ -5,17 +5,17 @@ import { Search, Bell, Image, MessageCircle, HelpCircle, Phone, Menu, X } from '
 const navLinkClass = ({ isActive }) =>
   isActive
     ? "text-blue-600 border-b-2 border-blue-600 pb-1 cursor-pointer whitespace-nowrap"
-    : "hover:text-blue-600 pb-1 cursor-pointer transition-colors whitespace-nowrap";
+    : "hover:text-blue-600 pb-1 cursor-pointer transition-colors duration-300 ease-in-out whitespace-nowrap";
 
 const mobileNavLinkClass = ({ isActive }) =>
   isActive
     ? "text-blue-600 cursor-pointer text-center"
-    : "hover:text-blue-600 cursor-pointer transition-colors text-center";
+    : "hover:text-blue-600 cursor-pointer transition-colors duration-300 ease-in-out text-center";
 
 const iconLinkClass = ({ isActive }) =>
   isActive
-    ? "flex flex-col items-center cursor-pointer text-blue-600 transition-colors relative"
-    : "flex flex-col items-center cursor-pointer hover:text-blue-600 transition-colors relative";
+    ? "flex flex-col items-center cursor-pointer text-blue-600 transition-colors duration-300 ease-in-out relative"
+    : "flex flex-col items-center cursor-pointer hover:text-blue-600 transition-colors duration-300 ease-in-out relative";
 
 const Navbar = ({ searchQuery, setSearchQuery }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -117,7 +117,7 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
             <NavLink to="/partnership" className={navLinkClass} title="Cybersecurity Partnership">CYBERSECURITY...</NavLink>
           </div>
           
-          <div className="flex items-center gap-3 xl:gap-4 pl-3 text-[9px] xl:text-[10px] text-gray-500 shrink-0">
+          <div className="flex items-center gap-3 xl:gap-4 pl-3 text-[9px] xl:text-[10px] font-bold text-gray-500 shrink-0">
             <NavLink to="/notifications" className={iconLinkClass}>
               <Bell size={16} className="mb-1" />
               <span className="whitespace-nowrap">Notification</span>
@@ -199,7 +199,7 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
           </div>
 
           {/* Mobile Action Icons */}
-          <div className="flex justify-between items-center text-xs text-gray-500 mt-4 border-t border-gray-100 pt-4 px-2">
+          <div className="flex justify-between items-center text-xs font-bold text-gray-500 mt-4 border-t border-gray-100 pt-4 px-2">
             <NavLink to="/notifications" onClick={() => setIsMobileMenuOpen(false)} className={iconLinkClass}>
               <Bell size={20} className="mb-1" />
               <span className="text-[10px] whitespace-nowrap">Notification</span>

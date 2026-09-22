@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Heart, Sparkles } from 'lucide-react';
 import { galleryHeaderData, galleryCards } from '../../data/gallery/galleryData.js';
+import NavPageHeader from '../../components/NavPageHeader';
 
 // CardItem Component (Embedded)
 function CardItem({ card, isActive, onClick }) {
@@ -287,35 +288,11 @@ export default function GalleryPage() {
 
       {/* Main Gallery Stage */}
       <main className="relative z-10 flex-1 pt-8 pb-6 sm:pb-10 flex flex-col items-center justify-start">
-        <style dangerouslySetInnerHTML={{
-            __html: `
-            @keyframes headerSlideDown {
-                0% { opacity: 0; transform: translateY(-30px); }
-                100% { opacity: 1; transform: translateY(0); }
-            }
-            .animate-header {
-                opacity: 0;
-                animation: headerSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            }
-            @keyframes descriptionFade {
-                0% { opacity: 0; transform: translateY(20px); }
-                100% { opacity: 1; transform: translateY(0); }
-            }
-            .animate-desc {
-                opacity: 0;
-                animation: descriptionFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
-            }
-            `
-        }} />
         {/* Original Static Header (Kept intact to match style) */}
-        <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-8 relative z-20">
-          <h1 className="animate-header text-4xl md:text-5xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-500 leading-tight">
-            Gallery
-          </h1>
-          <p className="animate-desc text-gray-700 text-lg font-medium leading-relaxed mb-4">
-            {galleryHeaderData.subDescription}
-          </p>
-        </div>
+        <NavPageHeader
+          title="Gallery"
+          description={galleryHeaderData.subDescription}
+        />
 
         {/* 3D Perspective Gallery Deck Stage */}
         <div className="w-full flex flex-col items-center">

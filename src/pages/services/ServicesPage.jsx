@@ -1,27 +1,12 @@
 import React from 'react';
 import { servicesData } from '../../data/services/servicesData';
+import NavPageHeader from '../../components/NavPageHeader';
 
 const serviceStyles = `
-  @keyframes fadeSlideDown {
-    0% { opacity: 0; transform: translateY(-30px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeSlideUp {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
   @keyframes cardEntrance {
     0% { opacity: 0; transform: translateY(60px) scale(0.9); }
     50% { opacity: 0.5; transform: translateY(-5px) scale(1.02); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  .animate-heading {
-    opacity: 0;
-    animation: fadeSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-  .animate-subheading {
-    opacity: 0;
-    animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
   }
   .animate-service-card {
     opacity: 0;
@@ -39,14 +24,10 @@ const ServicesPage = () => {
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
         
         {/* Header Outside the Page Box */}
-        <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-8 mt-16 md:mt-4">
-          <h1 className="animate-heading text-4xl md:text-5xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-500 drop-shadow-sm leading-tight">
-            Our Services
-          </h1>
-          <p className="animate-subheading text-gray-600 text-lg font-medium leading-relaxed px-4">
-            Explore CR-OD CTI services for cyber safety, incident assistance, victim support, threat awareness, legal information, cybersecurity education, public resources, and community-focused digital protection.
-          </p>
-        </div>
+        <NavPageHeader
+          title="Our Services"
+          description="Explore CR-OD CTI services for cyber safety, incident assistance, victim support, threat awareness, legal information, cybersecurity education, public resources, and community-focused digital protection."
+        />
 
         {/* The "Page" Box containing content */}
         <div className="bg-transparent relative min-h-[300px]">
