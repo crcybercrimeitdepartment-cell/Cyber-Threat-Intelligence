@@ -23,24 +23,28 @@ body {
 .watermark-bg {
   position: relative;
   z-index: 1;
-  background-color: #f8fafc;
+  background-color: #f8fafc !important;
 }
 
 .watermark-bg::before {
   content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
   background-image: url('./assets/bg-mobile.jpg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   background-repeat: no-repeat;
-  opacity: 0.08;
+  opacity: 0.14;
   pointer-events: none;
+  transform: translateZ(0);
+  will-change: transform;
+  contain: strict;
+}
+
+.watermark-bg > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Make section backgrounds transparent so the watermark is visible behind them, but cards stay solid */
@@ -49,9 +53,39 @@ body {
   background-color: transparent !important;
 }
 
+.watermark-bg:has(.software-mission-environment),
+.watermark-bg:has(.retro-environment),
+.watermark-bg:has(.what-we-do-environment),
+.watermark-bg:has(.software-vision-environment),
+.watermark-bg:has(.software-activities-environment),
+.watermark-bg:has(.software-purpose-environment),
+.watermark-bg:has(.software-objectives-environment) {
+  background-color: #f8fafc !important;
+}
+
+.watermark-bg:has(.software-mission-environment)::before,
+.watermark-bg:has(.retro-environment)::before,
+.watermark-bg:has(.what-we-do-environment)::before,
+.watermark-bg:has(.software-vision-environment)::before,
+.watermark-bg:has(.software-activities-environment)::before,
+.watermark-bg:has(.software-purpose-environment)::before,
+.watermark-bg:has(.software-objectives-environment)::before {
+  opacity: 0.18 !important;
+  display: block !important;
+}
+
+.watermark-bg:has(.classroom) {
+  background-color: transparent !important;
+}
+.watermark-bg:has(.classroom)::before {
+  opacity: 0.18 !important;
+  display: block !important;
+}
+
 @media (min-width: 768px) {
   .watermark-bg::before {
     background-image: url('./assets/bg-desktop.jpg');
+    opacity: 0.16;
   }
 }
 
@@ -146,7 +180,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (min-width: 768px) {
   .nav-header-unified {
-    margin-top: 1rem;
+    margin-top: 2.5rem;
   }
 }
 

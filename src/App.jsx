@@ -11,30 +11,30 @@ function App() {
 
   return (
     <Router>
-      <UIProtection
-        antiCopy={true}
-        antiSelect={true}
-        antiDrag={true}
-        rightClickProtection={true}
-        keyboardShortcutProtection={true}
-        imageDragProtection={true}
-        imageOpenProtection={true}
-        textHighlightProtection={true}
-        textDragProtection={true}
-        linkInteractionProtection={true}
-        readOnlyMode={true}
-        printRestriction={true}
-        className="min-h-screen bg-[#010914] font-sans text-white flex flex-col"
-      >
+      <div className="min-h-screen bg-[#010914] font-sans flex flex-col">
         <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         
-        <div className="flex-1 watermark-bg flex flex-col relative">
+        <UIProtection
+          antiCopy={true}
+          antiSelect={true}
+          antiDrag={true}
+          rightClickProtection={true}
+          keyboardShortcutProtection={true}
+          imageDragProtection={true}
+          imageOpenProtection={true}
+          textHighlightProtection={true}
+          textDragProtection={true}
+          linkInteractionProtection={true}
+          readOnlyMode={true}
+          printRestriction={true}
+          className="flex-1 watermark-bg flex flex-col relative text-white"
+        >
           <BackButton />
           <AppRoutes />
-        </div>
+        </UIProtection>
 
         <Footer />
-      </UIProtection>
+      </div>
     </Router>
   );
 }

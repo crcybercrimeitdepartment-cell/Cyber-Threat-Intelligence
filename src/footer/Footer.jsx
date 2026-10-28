@@ -1,145 +1,458 @@
-import { Globe, MessageCircle, Share2, Mail, ShieldCheck, MapPin, Fingerprint, ShieldAlert, Lock, Search, Eye, AlertTriangle, Server, Network } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  MapPin,
+  Mail,
+  Phone,
+  Clock,
+  ChevronRight,
+  CheckCircle2,
+} from 'lucide-react';
+import HotAirBalloon from './HotAirBalloon';
+import SkyBackground from './SkyBackground';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setSubscribed(true);
+      setTimeout(() => {
+        setSubscribed(false);
+        setEmail('');
+      }, 4000);
+    }
+  };
+
   return (
-    <footer className="relative w-full bg-[#fbf7f0] overflow-hidden font-sans border-t-4 border-cyan-500">
+    <footer className="relative z-30 w-full overflow-hidden text-slate-800 font-sans border-t border-sky-300/60 select-none bg-[#f0f7fe] isolate">
       
-      {/* ================= DESKTOP BACKGROUND (SVG Wave) ================= */}
-      <div className="absolute inset-0 z-0 hidden md:block">
-        <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 1000">
-          <rect width="1000" height="1000" fill="#fbf7f0" />
-          <path d="M0,0 L420,0 C480,300 320,700 460,1000 L0,1000 Z" fill="#06b6d4" />
-          <path d="M0,0 L400,0 C460,300 300,700 440,1000 L0,1000 Z" fill="#0a1526" />
+      {/* =========================================================
+          SKY BACKGROUND & MOVING CLOUDS
+          ========================================================= */}
+      <SkyBackground />
+
+      {/* =========================================================
+          ANIMATED HOT AIR BALLOON (Flies up on the right side)
+          ========================================================= */}
+      <HotAirBalloon />
+
+      {/* =========================================================
+          BACKGROUND ARTWORK: Waves and Dot Grids
+          ========================================================= */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
+        {/* Left Sweeping Cyan / Sky Blue Waves */}
+        <svg
+          className="absolute -bottom-10 -left-10 w-[420px] md:w-[560px] h-auto opacity-75"
+          viewBox="0 0 500 400"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M -50 220 C 120 220 220 300 320 420 L -50 420 Z"
+            fill="url(#leftCyanWave1)"
+          />
+          <path
+            d="M -50 280 C 140 270 240 330 360 450 L -50 450 Z"
+            fill="url(#leftCyanWave2)"
+          />
+          <defs>
+            <linearGradient id="leftCyanWave1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.45" />
+              <stop offset="100%" stopColor="#0284c7" stopOpacity="0.8" />
+            </linearGradient>
+            <linearGradient id="leftCyanWave2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#7dd3fc" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.6" />
+            </linearGradient>
+          </defs>
         </svg>
+
+        {/* Right Sweeping Deep Navy Wave */}
+        <svg
+          className="absolute -bottom-12 -right-10 w-[480px] md:w-[680px] h-auto opacity-95"
+          viewBox="0 0 600 400"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M 120 400 C 260 280 420 180 620 190 L 620 400 Z"
+            fill="url(#rightNavyWave1)"
+          />
+          <path
+            d="M 220 400 C 330 310 470 240 620 250 L 620 400 Z"
+            fill="url(#rightNavyWave2)"
+          />
+          <defs>
+            <linearGradient id="rightNavyWave1" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#0369a1" stopOpacity="0.35" />
+              <stop offset="50%" stopColor="#0284c7" stopOpacity="0.65" />
+              <stop offset="100%" stopColor="#082855" stopOpacity="0.9" />
+            </linearGradient>
+            <linearGradient id="rightNavyWave2" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#0c4a6e" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#061833" stopOpacity="0.98" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        {/* Left Dot Grid Matrix */}
+        <div className="absolute top-28 left-4 opacity-40 hidden sm:block">
+          <div className="grid grid-cols-4 gap-2.5">
+            {[...Array(16)].map((_, i) => (
+              <span key={i} className="w-1 h-1 rounded-full bg-[#38bdf8]"></span>
+            ))}
+          </div>
+        </div>
+
+        {/* Right Dot Grid Matrix */}
+        <div className="absolute top-8 right-8 opacity-45 hidden md:block">
+          <div className="grid grid-cols-5 gap-3">
+            {[...Array(25)].map((_, i) => (
+              <span key={i} className="w-1 h-1 rounded-full bg-[#60a5fa]"></span>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* ================= DECORATIVE SVGS (From Image Template) ================= */}
-      <div className="absolute inset-0 z-0 hidden md:block pointer-events-none overflow-hidden max-w-[1400px] mx-auto">
-        {/* Small Scattered Cyber Crime Background Icons */}
-        <div className="absolute top-[15%] left-[45%] opacity-[0.04]"><Lock size={32} className="text-[#0a1526]" /></div>
-        <div className="absolute top-[80%] left-[52%] opacity-[0.04]"><Fingerprint size={28} className="text-[#0a1526]" /></div>
-        <div className="absolute top-[25%] left-[75%] opacity-[0.04]"><Search size={36} className="text-[#0a1526]" /></div>
-        <div className="absolute top-[65%] left-[90%] opacity-[0.04]"><ShieldAlert size={28} className="text-[#0a1526]" /></div>
-        <div className="absolute top-[15%] left-[85%] opacity-[0.04]"><Eye size={30} className="text-[#0a1526]" /></div>
-        <div className="absolute top-[80%] left-[38%] opacity-[0.04]"><AlertTriangle size={24} className="text-[#0a1526]" /></div>
-        <div className="absolute top-[45%] left-[95%] opacity-[0.04]"><Server size={28} className="text-[#0a1526]" /></div>
-        <div className="absolute top-[85%] left-[72%] opacity-[0.04]"><Network size={32} className="text-[#0a1526]" /></div>
-
-        <div className="absolute top-[35%] left-[45%] lg:left-[48%] opacity-40">
-          <svg width="40" height="40" viewBox="0 0 50 50" fill="none" stroke="#facc15" strokeWidth="2.5"><circle cx="18" cy="18" r="12" /><circle cx="32" cy="32" r="12" /></svg>
-        </div>
-        <div className="absolute top-[25%] left-[62%] opacity-30">
-          <svg width="22" height="18" viewBox="0 0 28 20" fill="#06b6d4"><rect x="0" y="0" width="4" height="20" rx="1"/><rect x="8" y="0" width="4" height="20" rx="1"/><rect x="16" y="0" width="4" height="20" rx="1"/><rect x="24" y="0" width="4" height="20" rx="1"/></svg>
-        </div>
-        <div className="absolute top-[45%] right-[32%] lg:right-[35%] opacity-20">
-          <svg width="8" height="45" viewBox="0 0 8 45" fill="#64748b"><rect x="2.5" y="0" width="3" height="45" rx="1.5" /><rect x="0" y="10" width="8" height="4" rx="1" /><rect x="0" y="30" width="8" height="4" rx="1" /></svg>
-        </div>
-        <div className="absolute bottom-[20%] right-[10%] opacity-20 hidden lg:block">
-          <svg width="18" height="26" viewBox="0 0 18 26" fill="#64748b">
-            <rect x="0" y="0" width="4" height="4" /><rect x="7" y="0" width="4" height="4" /><rect x="14" y="0" width="4" height="4" /><rect x="0" y="7" width="4" height="4" /><rect x="7" y="7" width="4" height="4" /><rect x="14" y="7" width="4" height="4" /><rect x="0" y="14" width="4" height="4" /><rect x="7" y="14" width="4" height="4" /><rect x="14" y="14" width="4" height="4" /><rect x="0" y="21" width="4" height="4" /><rect x="7" y="21" width="4" height="4" /><rect x="14" y="21" width="4" height="4" />
-          </svg>
-        </div>
-      </div>
-
-      {/* ================= CONTENT CONTAINER ================= */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto flex flex-col md:flex-row items-stretch md:items-center md:py-8 lg:py-10 px-0 md:px-6">
-        
-        {/* Left Dark Content */}
-        <div className="w-full md:w-[40%] flex flex-col items-center md:items-start text-white bg-[#0a1526] md:bg-transparent pt-12 pb-16 px-6 md:pt-0 md:pb-0 md:px-0 md:pl-10 lg:pl-16 relative">
+      {/* =========================================================
+          MAIN FOOTER COLUMNS CONTAINER (4 Columns)
+          ========================================================= */}
+      <div className="relative z-10 max-w-[1440px] mx-auto pl-8 sm:pl-12 md:pl-16 lg:pl-20 pr-4 sm:pr-6 xl:pr-10 pt-7 pb-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-5 xl:gap-7 items-start">
           
-          {/* MOBILE WAVE SEPARATOR (Only visible on small screens) */}
-          <div className="absolute top-full left-0 w-full overflow-hidden leading-none md:hidden z-20 -mt-[1px]">
-             <svg className="relative block w-full h-[40px]" preserveAspectRatio="none" viewBox="0 0 1000 100">
-               <path d="M0,0 C300,100 700,0 1000,100 L1000,0 Z" fill="#06b6d4" />
-               <path d="M0,0 C300,80 700,-20 1000,80 L1000,0 Z" fill="#0a1526" />
-             </svg>
-          </div>
+          {/* ---------------- COLUMN 1: Brand & Identity (4 cols) ---------------- */}
+          <div className="lg:col-span-4 xl:col-span-4 flex flex-col items-start pr-0 lg:pr-4">
+            
+            {/* Logo & Brand Title */}
+            <div className="flex items-center gap-2.5 mb-2">
+              {/* Stylized Modern CR Vector Icon */}
+              <div className="relative w-9 h-9 shrink-0">
+                <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
+                  {/* Cyan Outer Arc */}
+                  <path
+                    d="M 50 12 A 38 38 0 1 0 88 50 A 10 10 0 0 0 68 50 A 18 18 0 1 1 50 32 A 10 10 0 0 0 50 12 Z"
+                    fill="url(#crCyanGrad)"
+                  />
+                  {/* Deep Navy 'R' Element */}
+                  <path
+                    d="M 56 34 L 56 68 L 66 68 L 66 54 L 75 68 L 88 68 L 76 51 C 82 48 85 43 85 39 C 85 34 80 34 74 34 Z M 66 41 L 74 41 C 76 41 77 42 77 44 C 77 46 76 47 74 47 L 66 47 Z"
+                    fill="#0a1931"
+                  />
+                  {/* Top Orange Dot Accent */}
+                  <circle cx="50" cy="14" r="5" fill="#f97316" />
+                  <defs>
+                    <linearGradient id="crCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#00b4d8" />
+                      <stop offset="100%" stopColor="#0077b6" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
 
-          <div className="w-full flex justify-between items-center mb-6 md:pr-12">
-            <h2 className="text-2xl lg:text-3xl font-black tracking-widest text-white drop-shadow-md">CR-OD</h2>
-            <div className="hidden lg:grid grid-cols-3 gap-1 opacity-20">
-              {[...Array(9)].map((_, i) => (<div key={i} className="w-1 h-1 bg-white rounded-sm"></div>))}
+              {/* Title & Slogan */}
+              <div className="flex flex-col">
+                <span className="text-[19px] font-black tracking-tight text-[#0a1629] leading-tight">
+                  CR Intelligence
+                </span>
+                <span className="text-[9.5px] font-semibold text-slate-500 tracking-wider">
+                  Research <span className="text-slate-300">|</span> Awareness <span className="text-slate-300">|</span> Digital Safety
+                </span>
+              </div>
             </div>
-          </div>
-          
-          <div className="w-full flex justify-center md:justify-start md:pl-4">
-            <div className="w-40 h-40 lg:w-44 lg:h-44 rounded-full border-4 border-cyan-500 overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.4)] bg-white flex items-center justify-center p-2 relative group">
-              <div className="absolute inset-0 border-4 border-white rounded-full z-10 pointer-events-none"></div>
-              <img src="/logo.jpg" alt="Logo" className="w-full h-full object-contain relative z-0 group-hover:scale-110 transition-transform duration-500" />
-            </div>
-          </div>
-        </div>
 
-        {/* Right Light Content */}
-        <div className="w-full md:w-[60%] flex flex-col md:flex-row md:pl-24 lg:pl-32 gap-10 md:gap-6 lg:gap-8 px-6 md:px-0 pt-16 md:pt-0 pb-10 md:pb-0">
-          
-          {/* About Column */}
-          <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left">
-            <h3 className="text-lg font-bold text-gray-900 mb-3 relative inline-block">
-              About CR-OD
-              <span className="absolute -bottom-1 left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 w-10 h-1 bg-cyan-500 rounded-full"></span>
-            </h3>
-            <p className="text-[13px] text-gray-700 leading-relaxed font-medium mt-1">
-              Awareness. Knowledge. Protection. Your Safety is Our Responsibility. We build a cyber-secure society through continuous awareness, actionable intelligence, and robust support frameworks.
+            {/* Mission Statement */}
+            <p className="text-[11.5px] leading-snug text-slate-600 font-normal my-1.5 max-w-[340px]">
+              Providing knowledge, research, and awareness to build a safer and more secure digital world for individuals, organizations, and communities.
             </p>
-            
-            <div className="mt-6 flex flex-col gap-2 items-center md:items-start">
-              <span className="text-[10px] font-extrabold text-gray-900 uppercase tracking-widest">Follow Us</span>
-              <div className="flex gap-2.5">
-                <a href="#" className="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white hover:bg-cyan-600 hover:-translate-y-1 transition-all shadow-md shadow-cyan-500/30"><Globe size={14} /></a>
-                <a href="#" className="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white hover:bg-cyan-600 hover:-translate-y-1 transition-all shadow-md shadow-cyan-500/30"><MessageCircle size={14} /></a>
-                <a href="#" className="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white hover:bg-cyan-600 hover:-translate-y-1 transition-all shadow-md shadow-cyan-500/30"><Share2 size={14} /></a>
+
+            {/* Social Media Circular Buttons */}
+            <div className="flex items-center gap-2 my-2">
+              {/* LinkedIn */}
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-7 h-7 rounded-full bg-[#0077b5] text-white flex items-center justify-center hover:scale-110 hover:shadow-md transition-all cursor-pointer"
+                aria-label="LinkedIn"
+              >
+                <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+
+              {/* X (formerly Twitter) */}
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-7 h-7 rounded-full bg-[#000000] text-white flex items-center justify-center hover:scale-110 hover:shadow-md transition-all cursor-pointer"
+                aria-label="X"
+              >
+                <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+
+              {/* YouTube */}
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-7 h-7 rounded-full bg-[#ff0000] text-white flex items-center justify-center hover:scale-110 hover:shadow-md transition-all cursor-pointer"
+                aria-label="YouTube"
+              >
+                <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+
+              {/* Instagram */}
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-7 h-7 rounded-full text-white flex items-center justify-center hover:scale-110 hover:shadow-md transition-all cursor-pointer"
+                style={{
+                  background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+                }}
+                aria-label="Instagram"
+              >
+                <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+
+              {/* Facebook */}
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-7 h-7 rounded-full bg-[#1877f2] text-white flex items-center justify-center hover:scale-110 hover:shadow-md transition-all cursor-pointer"
+                aria-label="Facebook"
+              >
+                <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+            </div>
+
+            {/* Bottom Slogan Accent Bar */}
+            <div className="mt-1 text-[10.5px] font-medium text-slate-500">
+              <div className="w-12 h-0.5 bg-[#00a3ff] rounded-full mb-1"></div>
+              <span>Empowering a <strong className="text-[#0a1629] font-bold">Safer Digital Tomorrow.</strong></span>
+            </div>
+          </div>
+
+          {/* ---------------- COLUMN 2: Quick Links (2 cols) ---------------- */}
+          <div className="lg:col-span-2 xl:col-span-2 flex flex-col">
+            <h3 className="text-[13px] font-extrabold text-[#0a1629] tracking-tight">
+              Quick Links
+            </h3>
+            <div className="w-5 h-0.5 bg-[#00a3ff] rounded-full mt-1 mb-2"></div>
+
+            <ul className="space-y-1.5 text-[11.5px] font-medium text-slate-600">
+              {[
+                { label: 'Home', to: '/' },
+                { label: 'About Us', to: '/about-us' },
+                { label: 'Our Work', to: '/services' },
+                { label: 'Products', to: '/public-cyber-services' },
+                { label: 'Resources', to: '/public-info' },
+                { label: 'News & Insights', to: '/notifications' },
+                { label: 'Careers', to: '/become-member' },
+                { label: 'Contact Us', to: '/contact-us' },
+              ].map((item, idx) => (
+                <li key={idx}>
+                  <Link
+                    to={item.to}
+                    className="group inline-flex items-center gap-1.5 hover:text-[#0070f3] hover:translate-x-1 transition-all"
+                  >
+                    <ChevronRight size={11} className="text-[#00a3ff] shrink-0 group-hover:scale-125 transition-transform" />
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ---------------- COLUMN 3: Our Services (3 cols) ---------------- */}
+          <div className="lg:col-span-3 xl:col-span-3 flex flex-col">
+            <h3 className="text-[13px] font-extrabold text-[#0a1629] tracking-tight">
+              Our Services
+            </h3>
+            <div className="w-5 h-0.5 bg-[#2563eb] rounded-full mt-1 mb-2"></div>
+
+            <ul className="space-y-1.5 text-[11.5px] font-medium text-slate-600">
+              {[
+                { label: 'Cyber Awareness', to: '/services' },
+                { label: 'Threat Research', to: '/services' },
+                { label: 'Digital Safety', to: '/public-cyber-services' },
+                { label: 'Training & Workshops', to: '/partnership' },
+                { label: 'Advisory & Consulting', to: '/cyber-assistance' },
+                { label: 'Research Publications', to: '/public-info' },
+                { label: 'Community Programs', to: '/become-member' },
+                { label: 'Intelligence Solutions', to: '/services' },
+              ].map((item, idx) => (
+                <li key={idx}>
+                  <Link
+                    to={item.to}
+                    className="group inline-flex items-center gap-1.5 hover:text-[#0070f3] hover:translate-x-1 transition-all"
+                  >
+                    <ChevronRight size={11} className="text-[#00a3ff] shrink-0 group-hover:scale-125 transition-transform" />
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ---------------- COLUMN 4: Get in Touch (3 cols) ---------------- */}
+          <div className="lg:col-span-3 xl:col-span-3 flex flex-col">
+            <h3 className="text-[13px] font-extrabold text-[#0a1629] tracking-tight">
+              Get in Touch
+            </h3>
+            <div className="w-5 h-0.5 bg-[#ea580c] rounded-full mt-1 mb-2"></div>
+
+            <div className="space-y-2.5">
+              {/* Location */}
+              <div className="flex items-start gap-2.5 group">
+                <div className="w-7 h-7 rounded-full bg-[#e0f2fe] text-[#0284c7] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <MapPin size={13.5} />
+                </div>
+                <div className="flex flex-col text-[11.5px] leading-tight text-slate-700">
+                  <span className="font-semibold text-[#0a1629]">Bhubaneswar, Odisha</span>
+                  <span className="text-slate-500 mt-0.5">India</span>
+                </div>
+              </div>
+
+              {/* Email */}
+              <a
+                href="mailto:info@crintelligence.in"
+                className="flex items-start gap-2.5 group cursor-pointer"
+              >
+                <div className="w-7 h-7 rounded-full bg-[#ffedd5] text-[#ea580c] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Mail size={13.5} />
+                </div>
+                <div className="flex flex-col text-[11.5px] leading-tight">
+                  <span className="font-semibold text-slate-700 group-hover:text-cyan-600 transition-colors">
+                    info@crintelligence.in
+                  </span>
+                </div>
+              </a>
+
+              {/* Phone */}
+              <a
+                href="tel:+919876543210"
+                className="flex items-start gap-2.5 group cursor-pointer"
+              >
+                <div className="w-7 h-7 rounded-full bg-[#ccfbf1] text-[#0d9488] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Phone size={13.5} />
+                </div>
+                <div className="flex flex-col text-[11.5px] leading-tight">
+                  <span className="font-semibold text-slate-700 group-hover:text-emerald-600 transition-colors">
+                    +91 98765 43210
+                  </span>
+                </div>
+              </a>
+
+              {/* Working Hours */}
+              <div className="flex items-start gap-2.5 group">
+                <div className="w-7 h-7 rounded-full bg-[#ede9fe] text-[#7c3aed] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Clock size={13.5} />
+                </div>
+                <div className="flex flex-col text-[11.5px] leading-tight text-slate-700">
+                  <span className="font-semibold text-[#0a1629]">Mon - Fri : 9:00 AM - 6:00 PM</span>
+                  <span className="text-slate-500 mt-0.5">(IST)</span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Divider Line */}
-          <div className="hidden md:block w-px bg-gray-300 mx-1"></div>
-          <div className="md:hidden h-px w-full bg-gray-300 my-1"></div>
-
-          {/* Contact / Title Column */}
-          <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left pt-2 md:pt-0">
-            <h2 className="text-xl font-black text-[#0a1526] leading-tight mb-0.5">
-              CYBER THREAT <span className="text-cyan-500">INTELLIGENCE</span>
-            </h2>
-            <p className="text-[11px] text-gray-500 font-medium mb-5">Official Portal</p>
-            
-            <div className="flex flex-col gap-4 w-full max-w-[280px] md:max-w-none mx-auto">
-              <div className="flex flex-col md:flex-row items-center md:items-center gap-2 md:gap-3 group cursor-pointer bg-white/50 md:bg-transparent p-3 md:p-0 rounded-xl">
-                <div className="w-10 h-10 md:w-8 md:h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white shrink-0 shadow-md shadow-cyan-500/30 group-hover:bg-cyan-600 transition-colors"><Mail size={14} /></div>
-                <div className="flex flex-col">
-                  <span className="text-[13px] font-bold text-gray-900 group-hover:text-cyan-600 transition-colors">contact@crod.in</span>
-                  <span className="text-[10px] text-gray-500">Official email address</span>
-                </div>
-              </div>
-              
-              <div className="flex flex-col md:flex-row items-center md:items-center gap-2 md:gap-3 group cursor-pointer bg-white/50 md:bg-transparent p-3 md:p-0 rounded-xl">
-                <div className="w-10 h-10 md:w-8 md:h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white shrink-0 shadow-md shadow-cyan-500/30 group-hover:bg-cyan-600 transition-colors"><ShieldCheck size={14} /></div>
-                <div className="flex flex-col">
-                  <span className="text-[13px] font-bold text-gray-900 group-hover:text-cyan-600 transition-colors">Report Cybercrime</span>
-                  <span className="text-[10px] text-gray-500">24/7 Incident Response</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row items-center md:items-center gap-2 md:gap-3 group cursor-pointer bg-white/50 md:bg-transparent p-3 md:p-0 rounded-xl">
-                <div className="w-10 h-10 md:w-8 md:h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white shrink-0 shadow-md shadow-cyan-500/30 group-hover:bg-cyan-600 transition-colors"><MapPin size={14} /></div>
-                <div className="flex flex-col">
-                  <span className="text-[13px] font-bold text-gray-900 group-hover:text-cyan-600 transition-colors">New Delhi, India</span>
-                  <span className="text-[10px] text-gray-500">Headquarters</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
         </div>
       </div>
 
-      {/* ================= BOTTOM BAR ================= */}
-      <div className="relative z-10 w-full bg-[#050a14] py-3 text-center px-4">
-        <p className="text-[11px] text-gray-400 font-medium tracking-wide">
-          &copy; {new Date().getFullYear()} CR-OD Cyber Threat Intelligence. All Rights Reserved.
-        </p>
+      {/* =========================================================
+          FLOATING "STAY UPDATED" NEWSLETTER BAR
+          ========================================================= */}
+      <div className="relative z-20 max-w-[1220px] mx-auto px-4 sm:px-6 mb-4 mt-1">
+        <div className="bg-white/95 backdrop-blur-md rounded-2xl md:rounded-3xl p-2.5 sm:p-3 md:py-2 md:px-5 shadow-[0_8px_24px_rgba(2,132,199,0.12)] border border-white/90 flex flex-col md:flex-row items-center justify-between gap-3">
+          
+          {/* Left Text & Icon */}
+          <div className="flex items-center gap-3 w-full md:w-auto">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#38bdf8] to-[#0284c7] text-white flex items-center justify-center shrink-0 shadow-md shadow-sky-500/20">
+              <Mail size={17} />
+            </div>
+            <div>
+              <h4 className="text-[13px] font-extrabold text-[#0a1629] leading-tight">
+                Stay Updated
+              </h4>
+              <p className="text-[11px] text-slate-500 font-normal leading-tight mt-0.5">
+                Get the latest updates on cyber awareness, research, and digital safety.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Input and Button Form */}
+          <form
+            onSubmit={handleSubscribe}
+            className="w-full md:w-auto flex flex-col sm:flex-row items-center gap-2"
+          >
+            <div className="relative w-full sm:w-[260px] lg:w-[300px]">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full h-8.5 bg-slate-50 border border-slate-200/90 rounded-full px-3.5 text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all pr-8"
+              />
+              <Mail
+                size={13}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full sm:w-auto h-8.5 px-5 rounded-full bg-gradient-to-r from-[#2563eb] to-[#00b4d8] hover:from-[#1d4ed8] hover:to-[#0284c7] text-white text-xs font-bold tracking-wide flex items-center justify-center gap-1.5 shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/35 transition-all cursor-pointer shrink-0"
+            >
+              {subscribed ? (
+                <>
+                  <CheckCircle2 size={13} className="text-emerald-300" />
+                  <span>Subscribed!</span>
+                </>
+              ) : (
+                <>
+                  <span>Subscribe</span>
+                  <ChevronRight size={13} />
+                </>
+              )}
+            </button>
+          </form>
+
+        </div>
       </div>
+
+      {/* =========================================================
+          DARK BOTTOM BAR (Copyright)
+          ========================================================= */}
+      <div className="relative z-40 w-full bg-[#050e1d] text-white py-2.5 px-5 sm:px-8 xl:px-12">
+        <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+          
+          {/* Copyright */}
+          <span className="text-[11px] font-semibold text-slate-200 tracking-tight">
+            &copy; {new Date().getFullYear()} CR Intelligence. All rights reserved.
+          </span>
+
+          <span className="text-[10px] text-slate-400 font-medium">
+            Empowering a Safer Digital World Through Knowledge and Awareness.
+          </span>
+
+        </div>
+      </div>
+
     </footer>
   );
 };

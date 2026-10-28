@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { aboutUsData } from '../../data/aboutUs/aboutUsData';
 import NavPageHeader from '../../components/NavPageHeader';
@@ -129,7 +130,8 @@ const iconComponents = {
   rocket: RocketIcon,
 };
 
-const Card = ({ number, title, description, iconName, color, index }) => {
+const Card = ({ number, title, description, iconName, color, index, link }) => {
+  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
   const cardRef = useRef(null);
@@ -168,6 +170,15 @@ const Card = ({ number, title, description, iconName, color, index }) => {
   const handleClick = () => {
     if (window.matchMedia('(max-width: 768px)').matches || window.matchMedia('(pointer: coarse)').matches) {
       setIsHovered(!isHovered);
+    } else if (link) {
+      navigate(link);
+    }
+  };
+
+  const handleButtonClick = (e) => {
+    e.stopPropagation();
+    if (link) {
+      navigate(link);
     }
   };
 
@@ -265,7 +276,7 @@ const Card = ({ number, title, description, iconName, color, index }) => {
         <div className="relative z-10 text-center flex flex-col items-center gap-1 sm:gap-1.5 px-0.5 w-full">
           <h3 
             style={{ color: isHovered ? '#ffffff' : '#374151' }}
-            className="font-extrabold text-[10px] sm:text-base tracking-wider uppercase font-sans transition-colors duration-[1500ms]"
+            className="font-extrabold text-[10px] sm:text-base tracking-wider uppercase font-sans transition-colors duration-[1500ms] min-h-[2.4rem] sm:min-h-[2.8rem] flex items-center justify-center leading-tight text-center"
           >
             {title}
           </h3>
@@ -282,6 +293,8 @@ const Card = ({ number, title, description, iconName, color, index }) => {
 
         {/* Click to View Button at the bottom */}
         <button 
+          type="button"
+          onClick={handleButtonClick}
           style={{ 
             color: isHovered ? '#ffffff' : color,
             borderColor: isHovered ? 'rgba(255,255,255,0.4)' : `${color}40`,
@@ -304,7 +317,7 @@ const Card = ({ number, title, description, iconName, color, index }) => {
   );
 };
 
-// 24 curated, premium color palettes
+// 30 curated, premium color palettes
 const colors = [
   "#3b5a7c", "#e9294f", "#0d9488", "#d97706",
   "#059669", "#4f46e5", "#7c3aed", "#c026d3",
@@ -312,6 +325,8 @@ const colors = [
   "#dc2626", "#334155", "#15803d", "#9d174d",
   "#b45309", "#0f766e", "#9333ea", "#0284c7",
   "#e11d48", "#1e3a8a", "#0891b2", "#581c87",
+  "#10b981", "#f59e0b", "#6366f1", "#84cc16",
+  "#ec4899", "#14b8a6"
 ];
 
 const iconNames = ["search", "chart", "target", "rocket"];
@@ -338,7 +353,7 @@ const AboutUsPage = () => {
         {/* Header Outside the Page Box */}
         <NavPageHeader
           title="About Us"
-          description="Learn about CR-OD CTI, our purpose, mission, vision, objectives, and commitment to building a safer, more aware, and digitally resilient society through cyber awareness, protection, support, and trusted information."
+          description="Discover CR OD Cyber Threat Intelligence, our mission, vision, objectives, and commitment to cybersecurity awareness. Explore our identity, activities, policies, and guiding principles as we work to promote digital knowledge, responsible online practices, and a safer digital environment."
         />
 
         {/* The "Page" Box containing everything */}
@@ -360,6 +375,7 @@ const AboutUsPage = () => {
                     iconName={iconName}
                     color={color}
                     index={index}
+                    link={step.link}
                   />
                 );
               })}
